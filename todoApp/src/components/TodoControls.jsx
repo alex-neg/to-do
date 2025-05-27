@@ -55,14 +55,17 @@ const TodoControls = () => {
       {/* Form with input, Add btn, Filter btns */}
       <div>
         <form onSubmit={addItem}>
-          <div className="flex items-center bg-white rounded-full">
+          <div className="flex items-center my-8 bg-gray-200 rounded-full">
             <input
               ref={inputRef}
-              className="bg-transparent text-slate-600 flex-1"
+              className="flex-1 bg-transparent border-0 outline-none h-14 pl-6 pr-2 placeholder:text-slate-600"
               type="text"
               placeholder="Add to-do"
             />
-            <button className="bg-orange-700" type="submit">
+            <button
+              className="bg-[#CC7351] text-white text-lg font-medium cursor-pointer border-none rounded-full w-32 h-14"
+              type="submit"
+            >
               Add
             </button>
           </div>
