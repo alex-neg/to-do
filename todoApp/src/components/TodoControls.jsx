@@ -44,6 +44,8 @@ const TodoControls = () => {
     });
   };
 
+  const filtered = filterItems(filter);
+
   return (
     <div className="flex flex-col bg-gray-400 place-self-center w-11/12 max-w-md min-h-[550px] p-8 rounded-xl">
       {/* Title */}
@@ -65,34 +67,49 @@ const TodoControls = () => {
             </button>
           </div>
           <div className="flex justify-center gap-6">
-            <button>All</button>
-            <button>Complete</button>
-            <button>Incomplete</button>
+            <button
+              type="button"
+              onClick={() => setFilter("All")}
+              className={filter === "All" ? "font-bold" : ""}
+            >
+              All
+            </button>
+            <button
+              type="button"
+              onClick={() => setFilter("Complete")}
+              className={filter === "Complete" ? "font-bold" : ""}
+            >
+              Complete
+            </button>
+            <button
+              type="button"
+              onClick={() => setFilter("Incomplete")}
+              className={filter === "Incomplete" ? "font-bold" : ""}
+            >
+              Incomplete
+            </button>
           </div>
         </form>
       </div>
 
       {/* Render items */}
 
-      {todos.map((item, index) => {
-        console.log("Item:", item);
-
-        if (!item) {
-          console.warn("Undefined item at index:", index);
-          return null;
-        }
-
-        return (
-          <TodoList
-            key={index}
-            text={item.text}
-            id={item.id}
-            isComplete={item.isComplete}
-            deleteItem={deleteItem}
-            toggleComplete={toggleComplete}
-          />
-        );
-      })}
+      <div className="mt-4">
+        {filtered.length === 0 ? (
+          <p className="text-center mt-4">No to-do items found.</p>
+        ) : (
+          filtered.map((item) => (
+            <TodoList
+              key={item.id}
+              text={item.text}
+              id={item.id}
+              isComplete={item.isComplete}
+              deleteItem={deleteItem}
+              toggleComplete={toggleComplete}
+            />
+          ))
+        )}
+      </div>
     </div>
   );
 };
